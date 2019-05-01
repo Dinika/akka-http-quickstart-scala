@@ -26,7 +26,6 @@ object QuickstartServer extends App with UserRoutes {
   //#main-class
   // from the UserRoutes trait
   lazy val routes: Route = userRoutes
-  //val route = concat(userRoutes, timeRoutes)
   //#main-class
 
   //#http-server

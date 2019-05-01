@@ -13,7 +13,7 @@ trait JsonSupport extends SprayJsonSupport {
   implicit val userJsonFormat = jsonFormat3(User)
   implicit val usersJsonFormat = jsonFormat1(Users)
   implicit val timeJsonFormat = jsonFormat1(Time)
-
+  implicit val dateJsonFormat = jsonFormat3(Date)
   implicit val actionPerformedJsonFormat = jsonFormat1(ActionPerformed)
 }
 //#json-support

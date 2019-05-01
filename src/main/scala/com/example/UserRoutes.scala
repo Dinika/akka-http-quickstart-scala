@@ -48,6 +48,20 @@ trait UserRoutes extends JsonSupport {
         })
     }
 
+  lazy val dateRoutes: Route =
+    pathPrefix("date") {
+      concat(
+        //#users-get-delete
+        pathEnd {
+          concat(
+            get {
+              val date: Future[Date] =
+                (userRegistryActor ? GetCurrentDate).mapTo[Date]
+              complete(date)
+            })
+        })
+    }
+
   lazy val usersRoutes: Route =
     pathPrefix("users") {
       concat(
@@ -97,6 +111,6 @@ trait UserRoutes extends JsonSupport {
       //#users-get-delete
     }
 
-  lazy val userRoutes: Route = concat(usersRoutes, timeRoutes)
+  lazy val userRoutes: Route = concat(usersRoutes, timeRoutes, dateRoutes)
   //#all-routes
 }
