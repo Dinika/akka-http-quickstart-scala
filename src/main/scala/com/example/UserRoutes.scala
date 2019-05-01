@@ -13,6 +13,7 @@ import akka.http.scaladsl.server.directives.PathDirectives.path
 
 import scala.concurrent.Future
 import com.example.UserRegistryActor._
+
 import akka.pattern.ask
 import akka.util.Timeout
 
@@ -22,7 +23,7 @@ trait UserRoutes extends JsonSupport {
 
   // we leave these abstract, since they will be provided by the App
   implicit def system: ActorSystem
-
+  private val cors = new CORSHandler {}
   lazy val log = Logging(system, classOf[UserRoutes])
 
   // other dependencies that UserRoutes use
@@ -111,6 +112,6 @@ trait UserRoutes extends JsonSupport {
       //#users-get-delete
     }
 
-  lazy val userRoutes: Route = concat(usersRoutes, timeRoutes, dateRoutes)
+  lazy val userRoutes: Route = cors.corsHandler(concat(usersRoutes, timeRoutes, dateRoutes))
   //#all-routes
 }
